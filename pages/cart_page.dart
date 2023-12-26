@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sd_assignment01/components/my_button.dart';
 import 'package:sd_assignment01/models/product.dart';
+import 'package:sd_assignment01/pages/payment.dart';
 
 import '../models/shop.dart';
 
@@ -33,7 +34,7 @@ class CartPage extends StatelessWidget {
               context.read<Shop>().removeFromCart(product);
 
             },
-            child: Text("Yes"),
+            child: const Text("Yes"),
           ),
         ],
       ),
@@ -41,13 +42,13 @@ class CartPage extends StatelessWidget {
   }
 
 // user pressed pay button
-  void payButtonPressed(BuildContext context){
-    showDialog(
-      context: context,
-      builder: (context) => const AlertDialog(
-      content
-          : Text("User wants to pay! Connect this app to your payment system"),
-      ),
+  void payButtonPressed(BuildContext context) {
+    double yourTotalAmount = 50000.0; // Replace with the actual total amount
+
+    // Navigate to PaymentPage
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PaymentPage(totalAmount: yourTotalAmount)),
     );
   }
   @override
@@ -88,10 +89,13 @@ class CartPage extends StatelessWidget {
           ),
 
           //pay button
+
           Padding(
             padding: const EdgeInsets.all(50.0),
             child: MyButton(
-                onTap: () => payButtonPressed(context), child:const Text("PAY NOW"),
+                onTap: () => payButtonPressed(context),
+                child:const Text("PAY NOW"),
+
             ),
           ),
 
